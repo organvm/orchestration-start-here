@@ -36,3 +36,24 @@ jobs:
 
       - name: Success
         run: echo "::notice::Minimal CI validation passed"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Install declared runtime deps directly; pytest finds the packages via
+          # pythonpath=["."] (the hatchling wheel build is a separate latent issue).
+          pip install pydantic click pyyaml requests matplotlib numpy pytest
+
+      - name: Run tests
+        run: pytest -q
