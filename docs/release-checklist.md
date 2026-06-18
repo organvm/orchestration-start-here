@@ -40,7 +40,7 @@ Standardize the release process across code and documentation repos. Every relea
 ### Post-Release
 
 - [ ] Smoke test on `main` after tag (clone fresh, install, run)
-- [ ] Update `registry-v2.json` if version is tracked there
+- [ ] Update `repo-registry.json` if version is tracked there
 - [ ] Announce via ORGAN-VII if the repo is PUBLIC_PROCESS or GRADUATED
 - [ ] Document rollback procedure:
   ```bash
@@ -74,7 +74,7 @@ Standardize the release process across code and documentation repos. Every relea
 
 ### Post-Release
 
-- [ ] Update `registry-v2.json` with new doc version or publish date
+- [ ] Update `repo-registry.json` with new doc version or publish date
 - [ ] Announce via ORGAN-VII:
   - Create or update kerygma profile if new doc repo
   - Trigger distribution dispatch event: `distribution.dispatched`

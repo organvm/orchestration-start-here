@@ -21,7 +21,7 @@ from pathlib import Path
 import yaml
 
 WORKSPACE = Path.home() / "Workspace"
-REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json"
+REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "repo-registry.json"
 
 ORGAN_ORGS = [
     "organvm-i-theoria",

@@ -35,7 +35,7 @@ jobs:
         run: pip install requests
 
       - name: Fetch canonical registry
-        run: bash scripts/fetch-registry.sh registry-v2.json
+        run: bash scripts/fetch-registry.sh repo-registry.json
 
       - name: Run registry health audit
         env:
@@ -59,9 +59,9 @@ jobs:
               return json.loads(result.stdout) if result.stdout.strip() else None
 
           # Load canonical registry
-          registry_path = 'registry-v2.json'
+          registry_path = 'repo-registry.json'
           if not os.path.exists(registry_path):
-              print("::error::registry-v2.json not found — fetch-registry.sh may have failed")
+              print("::error::repo-registry.json not found — fetch-registry.sh may have failed")
               sys.exit(1)
 
           with open(registry_path) as f:

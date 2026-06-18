@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Enforce the CI mandate across the eight-organ system.
 
-Audits every repository listed in registry-v2.json for the presence 
+Audits every repository listed in repo-registry.json for the presence 
 of a valid CI workflow file. Produces a Maturity Report.
 
 Utilizes dynamic environment variables (ORG_I...VII, ORGANVM_WORKSPACE_DIR)
@@ -18,7 +18,7 @@ WORKSPACE_DEFAULT = Path.home() / "Workspace"
 WORKSPACE = Path(os.environ.get("ORGANVM_WORKSPACE_DIR", str(WORKSPACE_DEFAULT)))
 
 # Try relative path first for the current environment
-REGISTRY_REL = Path("tool-interaction-design/.conductor/corpus-cache/registry-v2.json")
+REGISTRY_REL = Path("tool-interaction-design/.conductor/corpus-cache/repo-registry.json")
 
 def get_submodule_mappings():
     """Parse .gitmodules to map GitHub URLs to local paths."""
@@ -49,9 +49,9 @@ def audit_ci():
         # Fallback to absolute workspace path
         corpus_dir = os.environ.get("ORGANVM_CORPUS_DIR")
         if corpus_dir:
-            registry_path = Path(corpus_dir) / "registry-v2.json"
+            registry_path = Path(corpus_dir) / "repo-registry.json"
         else:
-            registry_path = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json"
+            registry_path = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "repo-registry.json"
 
     if not registry_path.exists():
         print(f"Error: Registry not found at {registry_path}")

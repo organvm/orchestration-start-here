@@ -147,7 +147,7 @@ python -m intake_router history [--domain organism] [--limit 10]
 This repository is part of the **ORGANVM** eight-organ creative-institutional system.
 It belongs to **ORGAN IV (Orchestration)** under the `organvm-iv-taxis` GitHub organization.
 
-**Registry:** [`registry-v2.json`](https://github.com/meta-organvm/organvm-corpvs-testamentvm/blob/main/registry-v2.json)
+**Registry:** [`repo-registry.json`](https://github.com/meta-organvm/organvm-corpvs-testamentvm/blob/main/repo-registry.json)
 **Corpus:** [`organvm-corpvs-testamentvm`](https://github.com/meta-organvm/organvm-corpvs-testamentvm)
 
 <!-- ORGANVM:AUTO:START -->

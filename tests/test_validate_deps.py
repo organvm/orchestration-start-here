@@ -43,7 +43,7 @@ class TestLoadRegistry:
     """Test load_registry() fallback and redirect behavior."""
 
     def test_missing_registry_falls_back_to_default_candidate(self, tmp_path, monkeypatch):
-        canonical = tmp_path / "registry-v2.json"
+        canonical = tmp_path / "repo-registry.json"
         canonical.write_text(
             json.dumps({"version": "2.0", "organs": {}}),
             encoding="utf-8",
@@ -56,10 +56,10 @@ class TestLoadRegistry:
     def test_redirect_registry_follows_default_candidate(self, tmp_path, monkeypatch):
         redirect = tmp_path / "registry.json"
         redirect.write_text(
-            json.dumps({"_redirect": "Use registry-v2.json"}),
+            json.dumps({"_redirect": "Use repo-registry.json"}),
             encoding="utf-8",
         )
-        canonical = tmp_path / "registry-v2.json"
+        canonical = tmp_path / "repo-registry.json"
         canonical.write_text(
             json.dumps({"version": "2.0", "organs": {}}),
             encoding="utf-8",

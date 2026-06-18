@@ -32,7 +32,7 @@ jobs:
 
       - name: Fetch Central Data
         run: |
-          bash scripts/fetch-registry.sh registry-v2.json
+          bash scripts/fetch-registry.sh repo-registry.json
           curl -sL https://raw.githubusercontent.com/organvm-iv-taxis/orchestration-start-here/main/governance-rules.json \
             -o governance-rules.json
 
@@ -63,7 +63,7 @@ jobs:
 
       - name: Fetch Central Data
         run: |
-          bash scripts/fetch-registry.sh registry-v2.json
+          bash scripts/fetch-registry.sh repo-registry.json
           curl -sL https://raw.githubusercontent.com/organvm-iv-taxis/orchestration-start-here/main/governance-rules.json \
             -o governance-rules.json
 
@@ -95,7 +95,7 @@ jobs:
           repo_name = source_repo.split("/")[-1] if "/" in source_repo else source_repo
           org_name = source_repo.split("/")[0] if "/" in source_repo else ""
 
-          with open("registry-v2.json") as f:
+          with open("repo-registry.json") as f:
               registry = json.load(f)
           with open("governance-rules.json") as f:
               governance = json.load(f)

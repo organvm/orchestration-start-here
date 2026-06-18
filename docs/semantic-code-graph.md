@@ -179,7 +179,7 @@ pip install tree-sitter tree-sitter-python tree-sitter-typescript
 
 ```
 meta-organvm/organvm-corpvs-testamentvm/
-├── registry-v2.json          # Repo-level metadata
+├── repo-registry.json          # Repo-level metadata
 ├── code-graph.json           # Symbol-level graph (new)
 └── system-metrics.json       # Computed metrics
 ```
@@ -304,7 +304,7 @@ jobs:
 ## References
 
 - `scripts/validate-deps.py` — Existing repo-level dependency validation (graph extends this to symbol level)
-- `registry-v2.json` — Repo metadata that the graph enriches
+- `repo-registry.json` — Repo metadata that the graph enriches
 - `governance-rules.json` — Article II (dependency rules the graph enforces)
 - [GitHub Custom Properties](github-custom-properties.md) — Complementary metadata layer
 - tree-sitter: https://tree-sitter.github.io/tree-sitter/

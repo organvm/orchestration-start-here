@@ -59,7 +59,7 @@ This dual role is intentional. Verification and discourse are two sides of the s
 
 META does not map to a single SDLC phase. It operates as a cross-cutting governance layer:
 
-- **Registry** (`registry-v2.json`): single source of truth for all repos
+- **Registry** (`repo-registry.json`): single source of truth for all repos
 - **Schemas**: `seed.yaml` schema, event catalog, organ-aesthetic definitions
 - **Dashboard**: system-wide health metrics and promotion pipeline visualization
 - **Governance rules**: dependency validation, promotion constraints

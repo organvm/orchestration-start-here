@@ -16,7 +16,7 @@ Define CODEOWNERS patterns that reflect the organ model's separation of concerns
 
 | Path Pattern | Owner Role | Rationale |
 |---|---|---|
-| `registry-v2.json` | ORGAN-IV maintainer | Single source of truth; changes ripple across all organs |
+| `repo-registry.json` | ORGAN-IV maintainer | Single source of truth; changes ripple across all organs |
 | `governance-rules.json` | ORGAN-IV maintainer | Governance amendments require deliberate review |
 | `seed.yaml` | Repo primary maintainer | Organ membership and edge declarations |
 | `.github/workflows/` | ORGAN-IV stage crew | CI/CD is orchestration infrastructure |
@@ -93,7 +93,7 @@ Place this at `.github/CODEOWNERS` in each repo. Adjust GitHub usernames/teams a
 ```
 # High-sensitivity governance files
 /governance-rules.json      @4444j99
-/registry-v2.json           @4444j99
+/repo-registry.json           @4444j99
 /scripts/validate-deps.py   @4444j99
 ```
 

@@ -26,7 +26,7 @@ jobs:
         run: pip install requests pyyaml
 
       - name: Fetch canonical registry
-        run: bash scripts/fetch-registry.sh registry-v2.json
+        run: bash scripts/fetch-registry.sh repo-registry.json
 
       - name: Evaluate promotion candidates
         env:
@@ -81,9 +81,9 @@ jobs:
               return int(size_bytes * 0.18)
 
           # Load canonical registry
-          registry_path = 'registry-v2.json'
+          registry_path = 'repo-registry.json'
           if not os.path.exists(registry_path):
-              print("::error::registry-v2.json not found — fetch-registry.sh may have failed")
+              print("::error::repo-registry.json not found — fetch-registry.sh may have failed")
               sys.exit(1)
 
           with open(registry_path) as f:
@@ -107,8 +107,8 @@ jobs:
 
                   full_ref = f"{org_name}/{repo_name}"
 
-                  # Check for staleness (PRODUCTION repos not validated in 30+ days)
-                  if impl_status == 'PRODUCTION' and last_validated:
+                  # Check for staleness (ACTIVE repos not validated in 30+ days)
+                  if impl_status == 'ACTIVE' and last_validated:
                       try:
                           validated_date = datetime.fromisoformat(last_validated)
                           days_since = (now - validated_date).days
@@ -152,7 +152,7 @@ jobs:
                           }
 
                   elif impl_status == 'PROTOTYPE':
-                      # PROTOTYPE → PRODUCTION: README >2,000 words, CI green 7+ days
+                      # PROTOTYPE → ACTIVE: README >2,000 words, CI green 7+ days
                       ci = get_ci_status(org_name, repo_name)
                       readme_words = get_readme_size(org_name, repo_name)
                       ci_passing = ci and ci.get('conclusion') == 'success'
@@ -163,7 +163,7 @@ jobs:
                               'repo': full_ref,
                               'organ': organ_key,
                               'current': 'PROTOTYPE',
-                              'proposed': 'PRODUCTION',
+                              'proposed': 'ACTIVE',
                               'reason': f'README ~{readme_words} words, CI passing',
                               'evidence': {'readme_words': readme_words, 'ci': ci},
                           }

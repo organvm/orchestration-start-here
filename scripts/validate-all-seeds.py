@@ -4,7 +4,7 @@
 
 Three validation layers:
   1. Schema — YAML parseable, required fields present
-  2. Registry agreement — metadata matches registry-v2.json
+  2. Registry agreement — metadata matches repo-registry.json
   3. Graph integrity — produces/consumes references resolve
 
 When organvm-engine is installed, delegates seed discovery and contract
@@ -12,7 +12,7 @@ validation to the canonical modules. Falls back to standalone implementation.
 
 Usage:
     python3 scripts/validate-all-seeds.py
-    python3 scripts/validate-all-seeds.py --registry /path/to/registry-v2.json
+    python3 scripts/validate-all-seeds.py --registry /path/to/repo-registry.json
     python3 scripts/validate-all-seeds.py --json
 """
 from __future__ import annotations
@@ -37,7 +37,7 @@ except ImportError:
     _HAS_ENGINE = False
 
 WORKSPACE = Path.home() / "Workspace"
-REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json"
+REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "repo-registry.json"
 
 ORGAN_ORGS = [
     "organvm-i-theoria",
@@ -76,7 +76,7 @@ def discover_seeds(workspace: Path) -> dict[str, Path]:
 
 
 def load_registry(path: Path) -> dict[str, dict]:
-    """Load registry-v2.json into {org/repo: entry} dict."""
+    """Load repo-registry.json into {org/repo: entry} dict."""
     with open(path) as f:
         data = json.load(f)
     flat: dict[str, dict] = {}
@@ -141,7 +141,7 @@ def validate_registry_agreement(
     errors = []
 
     if key not in registry:
-        errors.append(f"{key}: Not in registry-v2.json")
+        errors.append(f"{key}: Not in repo-registry.json")
         return errors
 
     try:

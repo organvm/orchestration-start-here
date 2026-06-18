@@ -112,7 +112,7 @@ def main() -> None:
     )
 
     # --- Data sources ---
-    parser.add_argument("--registry", required=True, type=Path, help="Path to registry-v2.json")
+    parser.add_argument("--registry", required=True, type=Path, help="Path to repo-registry.json")
     parser.add_argument("--workspace", type=Path, default=None, help="Workspace root for local filesystem checks")
 
     # --- Display modes (mutually exclusive) ---

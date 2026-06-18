@@ -142,7 +142,7 @@ IDENTIFY ──> TRACE ──> CHAIN ──> FRESHNESS ──> INTENT ──> RE
 | Cache content has diverged intentionally — local modifications were made on top of the copy | FRESHNESS phase finds content drift that is not staleness but intentional local extension | Reclassify as DERIVED rather than CACHE; document the delta; recommend extracting the extension into a separate file that overlays the canonical |
 | Symlinks broken by submodule operations — `git submodule update` can break cross-submodule symlinks | FRESHNESS phase finds broken symlinks | Replace with CI sync job; symlinks across submodule boundaries are inherently fragile |
 | Trace phase produces false positives — files with the same name but unrelated content | TRACE phase flags files that share a name but have <10% key overlap | Apply content similarity threshold; discard candidates below threshold |
-| Canonical file is itself a cache of an external source (e.g., registry-v2.json generated from GitHub API) | IDENTIFY phase discovers that the "canonical" file is generated | Extend the chain upstream: external source -> generated canonical -> caches. Document the generation mechanism as the root freshness dependency |
+| Canonical file is itself a cache of an external source (e.g., repo-registry.json generated from GitHub API) | IDENTIFY phase discovers that the "canonical" file is generated | Extend the chain upstream: external source -> generated canonical -> caches. Document the generation mechanism as the root freshness dependency |
 
 ---
 
@@ -162,4 +162,4 @@ IDENTIFY ──> TRACE ──> CHAIN ──> FRESHNESS ──> INTENT ──> RE
 
 - **Owner:** ORGAN-IV (Taxis)
 - **Lifecycle:** REP — needs second run on different target to reach ABSORB
-- **Next target:** META-ORGANVM — the canonical home of registry-v2.json and governance-rules.json; running RCC there will trace the full downstream caching chain across all 9 organs and validate that the system's most critical authoritative files have adequate freshness guarantees
+- **Next target:** META-ORGANVM — the canonical home of repo-registry.json and governance-rules.json; running RCC there will trace the full downstream caching chain across all 9 organs and validate that the system's most critical authoritative files have adequate freshness guarantees

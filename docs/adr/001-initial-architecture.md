@@ -14,7 +14,7 @@ Accepted
 
 ## Decision
 
-We chose Python as the primary implementation language, leveraging its ecosystem for scientific computing, data processing, and AI/ML integration. The project follows the organvm repository standards (documented in `docs/standards/10-repository-standards.md` of the planning corpus) and integrates with the cross-organ dependency graph maintained in `registry-v2.json`.
+We chose Python as the primary implementation language, leveraging its ecosystem for scientific computing, data processing, and AI/ML integration. The project follows the organvm repository standards (documented in `docs/standards/10-repository-standards.md` of the planning corpus) and integrates with the cross-organ dependency graph maintained in `repo-registry.json`.
 
 Key architectural choices:
 - **Language**: Python — selected for ecosystem fit and team expertise
@@ -39,4 +39,4 @@ Key architectural choices:
 
 - Part of the [organvm eight-organ system](https://github.com/meta-organvm)
 - Organ: ORGAN-IV (Taxis)
-- Registry: `registry-v2.json` in [organvm-corpvs-testamentvm](https://github.com/meta-organvm/organvm-corpvs-testamentvm)
+- Registry: `repo-registry.json` in [organvm-corpvs-testamentvm](https://github.com/meta-organvm/organvm-corpvs-testamentvm)

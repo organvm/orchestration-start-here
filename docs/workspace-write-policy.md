@@ -124,7 +124,7 @@ The following files must never be overwritten wholesale. Always read before writ
 
 | File | Location | Guard |
 |---|---|---|
-| `registry-v2.json` | `meta-organvm/organvm-corpvs-testamentvm/` | `save_registry()` refuses <50 entries |
+| `repo-registry.json` | `meta-organvm/organvm-corpvs-testamentvm/` | `save_registry()` refuses <50 entries |
 | `registry.json` | `orchestration-start-here/` | Same guard |
 | `governance-rules.json` | `orchestration-start-here/` | Manual review required |
 | `system-metrics.json` | Multiple locations | Computed — never hand-edit |
@@ -271,7 +271,7 @@ WRITE FORBIDDEN:
   ~/Library/                    (apps)
 
 PROTECTED FILES (read before write, never overwrite wholesale):
-  registry-v2.json, registry.json, governance-rules.json,
+  repo-registry.json, registry.json, governance-rules.json,
   system-metrics.json, seed.yaml
 
 ENFORCEMENT:

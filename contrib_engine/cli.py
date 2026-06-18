@@ -62,7 +62,7 @@ def register_contrib_commands(
         "--skip-remote", action="store_true", help="Skip creating GitHub remote"
     )
     approve_parser.add_argument(
-        "--skip-registry", action="store_true", help="Skip registry-v2.json update"
+        "--skip-registry", action="store_true", help="Skip repo-registry.json update"
     )
     approve_parser.set_defaults(func=cmd_contrib_approve)
 

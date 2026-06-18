@@ -26,7 +26,7 @@ jobs:
         run: pip install requests pyyaml
 
       - name: Fetch canonical registry
-        run: bash scripts/fetch-registry.sh registry-v2.json
+        run: bash scripts/fetch-registry.sh repo-registry.json
 
       - name: Build system graph from seed.yaml contracts
         env:
@@ -65,9 +65,9 @@ jobs:
                   return None
 
           # Load canonical registry
-          registry_path = 'registry-v2.json'
+          registry_path = 'repo-registry.json'
           if not os.path.exists(registry_path):
-              print("::error::registry-v2.json not found — fetch-registry.sh may have failed")
+              print("::error::repo-registry.json not found — fetch-registry.sh may have failed")
               sys.exit(1)
 
           with open(registry_path) as f:

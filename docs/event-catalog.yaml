@@ -26,7 +26,7 @@ events:
     fallback:
       type: scheduled
       schedule: "Tuesday 10:00 UTC"
-      mechanism: Polls registry-v2.json for ORGAN-I CANDIDATE repos
+      mechanism: Polls repo-registry.json for ORGAN-I CANDIDATE repos
     gates:
       - documentation-complete (README deployed)
       - promotion-status >= CANDIDATE
@@ -154,7 +154,7 @@ events:
       All organs should re-validate their compliance.
     producer:
       organ: ORGAN-META
-      trigger: Push to registry-v2.json or governance-rules.json
+      trigger: Push to repo-registry.json or governance-rules.json
     consumer:
       organ: all
     priority: normal

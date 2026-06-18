@@ -34,7 +34,7 @@ A reusable 4-week template that takes a newly created (or newly adopted) repo fr
 
 ### Epistemic Tuning — Week 1
 
-- **Breadcrumb reconciliation**: Does the seed.yaml accurately reflect what the repo will produce/consume? Cross-check against `registry-v2.json` edges for sibling repos.
+- **Breadcrumb reconciliation**: Does the seed.yaml accurately reflect what the repo will produce/consume? Cross-check against `repo-registry.json` edges for sibling repos.
 - **Staleness check**: Is the README description still accurate after the first few commits? Update immediately if scope shifted during setup.
 
 ---
@@ -71,7 +71,7 @@ A reusable 4-week template that takes a newly created (or newly adopted) repo fr
 ### Deliverables
 
 - [ ] CI pipeline operational (GitHub Actions workflow passing)
-- [ ] Registry entry added to `registry-v2.json` (or confirmed existing)
+- [ ] Registry entry added to `repo-registry.json` (or confirmed existing)
 - [ ] `validate-deps.py` passes with this repo included (no back-edges)
 - [ ] Governance compliance verified: correct organ, tier, promotion_status
 - [ ] Promotion to CANDIDATE (if CI green + all spine files present)

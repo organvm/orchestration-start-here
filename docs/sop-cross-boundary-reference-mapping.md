@@ -49,7 +49,7 @@ ENUMERATE ──> TRACE ──> CLASSIFY ──> CACHE ──> MAP ──> RECOM
 ### Phase 2: TRACE
 **Purpose:** For each candidate file, discover every consumer — any code, script, or configuration that reads, imports, copies, or references it.
 **Invariant steps:**
-1. For each file in the inventory, extract the filename and any known aliases (e.g., `registry-v2.json` might also be referenced as `registry.json`).
+1. For each file in the inventory, extract the filename and any known aliases (e.g., `repo-registry.json` might also be referenced as `registry.json`).
 2. Search the entire scope for: direct path references, filename references, import statements, `open()` / `fs.readFile()` / `yaml.safe_load()` calls mentioning the file, shell commands (`cat`, `cp`, `jq`) targeting the file.
 3. For each discovered consumer, record: consumer path, consumer repo/submodule, reference type (import, path literal, copy command, config lookup), and line number.
 4. Flag consumers that reference the file by relative path (fragile) vs. absolute path or environment variable (stable).

@@ -38,7 +38,7 @@ ENUMERATE ──> EVIDENCE ──> CHECK ──> GRADE ──> REPORT
 ### Phase 1: ENUMERATE
 **Purpose:** Collect every status or maturity claim across the system.
 **Invariant steps:**
-1. Extract promotion states from the registry (registry-v2.json or equivalent): for each repo, record the declared `promotion_status`.
+1. Extract promotion states from the registry (repo-registry.json or equivalent): for each repo, record the declared `promotion_status`.
 2. Extract tier claims from seed.yaml files: `tier` (flagship, standard, infrastructure) and any `maturity` or `status` fields.
 3. Search documentation (CLAUDE.md, README.md, AGENTS.md) for quantitative claims: test counts ("638 tests"), coverage percentages ("80% coverage"), feature completeness ("production-ready"), CI status claims ("all checks passing").
 4. Search CI workflow files for threshold declarations: coverage minimums, required check lists, quality gate definitions.
