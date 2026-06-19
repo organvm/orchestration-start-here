@@ -45,8 +45,8 @@ WORKSPACE = Path.home() / "Workspace"
 SCRIPT_DIR = Path(__file__).resolve().parent
 SCRIPT_WORKSPACE = SCRIPT_DIR.parents[2]
 DEFAULT_REGISTRY_CANDIDATES = (
-    WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json",
-    SCRIPT_WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json",
+    WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "repo-registry.json",
+    SCRIPT_WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "repo-registry.json",
 )
 
 

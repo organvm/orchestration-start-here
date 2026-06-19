@@ -146,7 +146,7 @@ All 14 have empty `artifact_path` — none written to destination directories.
 
 ### Edge Gaps
 
-27 non-LOCAL repos have empty `dependencies` in registry-v2.json, including 7 flagships.
+27 non-LOCAL repos have empty `dependencies` in repo-registry.json, including 7 flagships.
 
 ---
 
@@ -201,7 +201,7 @@ Zero TODO/FIXME/HACK/XXX in scanned Python files. Debt lives in structural form 
 | IRF-SYS-009 | Gmail notification hygiene filter | Human | Recurring friction |
 | IRF-SYS-011 | GoDaddy domains PARKED — billing | Human | Revenue risk |
 | IRF-SYS-012 | Vercel deployment cascade (18+ failures) | Agent | Blocks all deploys |
-| IRF-DOM-002 | Add domus to registry-v2.json | Agent | Keystone — unblocks 3 items |
+| IRF-DOM-002 | Add domus to repo-registry.json | Agent | Keystone — unblocks 3 items |
 
 ### P1 Structural (154 total, key items)
 

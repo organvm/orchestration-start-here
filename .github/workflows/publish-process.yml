@@ -27,7 +27,7 @@ jobs:
           python-version: '3.12'
 
       - name: Fetch canonical registry
-        run: bash scripts/fetch-registry.sh registry-v2.json
+        run: bash scripts/fetch-registry.sh repo-registry.json
 
       - name: Validate publish gates
         id: gates

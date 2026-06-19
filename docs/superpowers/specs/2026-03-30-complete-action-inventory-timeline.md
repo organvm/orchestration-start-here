@@ -158,7 +158,7 @@
 | 1 | `validate-deps.py` | **ALIVE** | CI gatekeeper — validates unidirectional dependency graph |
 | 2 | `organ-audit.py` | **ALIVE** | Monthly system health audit across 8 organs |
 | 3 | `calculate-metrics.py` | **ALIVE** | Registry metrics computation (called by audit workflow) |
-| 4 | `generate-seed-from-registry.py` | **ALIVE** | Reconcile seed.yaml files against registry-v2.json |
+| 4 | `generate-seed-from-registry.py` | **ALIVE** | Reconcile seed.yaml files against repo-registry.json |
 | 5 | `validate-all-seeds.py` | **ALIVE** | Validate all seed.yaml files workspace-wide |
 | 6 | `deploy-seeds-local.sh` | **ALIVE** | Commit + push seed changes per organ (16GB RAM-aware) |
 | 7 | `fetch-registry.sh` | **ALIVE** | Fetch canonical registry from corpvs-testamentvm |

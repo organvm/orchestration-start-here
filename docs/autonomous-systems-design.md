@@ -25,7 +25,7 @@ The system is already partially deployed. The `registry-health-audit.yml` workfl
 
 **Key constraints from the project constitution:**
 
-- `registry-v2.json` is the single source of truth (Article I)
+- `repo-registry.json` is the single source of truth (Article I)
 - Dependencies flow unidirectionally: I -> II -> III only (Article II)
 - Documentation precedes deployment (Article IV)
 - Every README is a portfolio piece (Article V)
@@ -114,7 +114,7 @@ metadata:
 |-------|----------|------|-------------|
 | `schema_version` | Yes | string | Semver of the seed.yaml schema |
 | `organ` | Yes | string | Organ identifier (ORGAN-I through ORGAN-VII, META-ORGANVM) |
-| `repo` | Yes | string | Repository name (matches registry-v2.json) |
+| `repo` | Yes | string | Repository name (matches repo-registry.json) |
 | `org` | Yes | string | GitHub organization slug |
 | `produces[]` | No | array | Outputs this repo creates for other organs |
 | `produces[].type` | Yes | string | Semantic type (e.g., "theoretical-framework", "art-work", "commercial-product") |
@@ -127,15 +127,15 @@ metadata:
 | `agents[]` | No | array | Automated workflows associated with this repo |
 | `agents[].trigger` | Yes | string or object | `on_push`, `on_release`, `on_pr`, or `{ schedule: "cron" }` |
 | `subscriptions[]` | No | array | Cross-organ event listeners |
-| `metadata` | Yes | object | Must mirror registry-v2.json fields |
+| `metadata` | Yes | object | Must mirror repo-registry.json fields |
 
 ### 2.4 Deployed Reference: orchestration-start-here
 
 The canonical seed.yaml is deployed at `organvm-iv-taxis/orchestration-start-here/seed.yaml`. This file declares orchestration-start-here as the system's central nervous system — consuming registry data from all 88 repos and producing governance validations, health reports, and promotion decisions. All other repos' seed.yaml files should reference this contract as the authoritative example.
 
-### 2.5 Invariant: seed.yaml Must Agree with registry-v2.json
+### 2.5 Invariant: seed.yaml Must Agree with repo-registry.json
 
-The `metadata` block in every seed.yaml must be consistent with the corresponding entry in `registry-v2.json`. The `orchestrator-agent` validates this invariant on every run. If seed.yaml and registry disagree, the registry wins (Article I of the constitution). The seed.yaml is then flagged for update.
+The `metadata` block in every seed.yaml must be consistent with the corresponding entry in `repo-registry.json`. The `orchestrator-agent` validates this invariant on every run. If seed.yaml and registry disagree, the registry wins (Article I of the constitution). The seed.yaml is then flagged for update.
 
 ---
 
@@ -200,7 +200,7 @@ ORGAN-IV (Taxis) does not participate in the content pipeline. It sits above all
 
 1. **Validation:** The `dependency-validator` agent checks every proposed connection against the dependency graph. No back-edges. No circular dependencies. Transitive depth <= 4.
 2. **Promotion:** The `promotion-recommender` agent scans repos monthly and identifies candidates for state-machine advancement (DESIGN_ONLY -> SKELETON -> PROTOTYPE -> PRODUCTION).
-3. **Health:** The `registry-health-auditor` agent runs weekly, validating that all 88 repos are consistent with registry-v2.json and that no seed.yaml contracts have drifted from reality.
+3. **Health:** The `registry-health-auditor` agent runs weekly, validating that all 88 repos are consistent with repo-registry.json and that no seed.yaml contracts have drifted from reality.
 
 ### 3.3 META-ORGANVM as Umbrella
 
@@ -210,7 +210,7 @@ meta-organvm holds the system-wide identity and the corpus testamentvm (this pla
 
 ## 4. Autonomous Agents Catalog
 
-Each agent is a GitHub Actions workflow with a defined trigger, scope, and output. Agents read from seed.yaml contracts and registry-v2.json; they write to GitHub Issues, PRs, and (where authorized) the registry itself.
+Each agent is a GitHub Actions workflow with a defined trigger, scope, and output. Agents read from seed.yaml contracts and repo-registry.json; they write to GitHub Issues, PRs, and (where authorized) the registry itself.
 
 ### 4.1 ORGAN-IV (Orchestration) Agents
 
@@ -218,9 +218,9 @@ Each agent is a GitHub Actions workflow with a defined trigger, scope, and outpu
 
 - **Workflow:** `registry-health-audit.yml` at `orchestration-start-here`
 - **Trigger:** `schedule: "0 6 * * 1"` (weekly Monday 06:00 UTC) + `workflow_dispatch`
-- **Scope:** All 88 repos in registry-v2.json
+- **Scope:** All 88 repos in repo-registry.json
 - **Actions:** Validates JSON schema consistency, checks `implementation_status_distribution` totals, verifies all repos are reachable via GitHub API, flags repos with stale `last_validated` dates (>30 days)
-- **Output:** GitHub Issue with health report; updates `audit_history[]` in registry-v2.json
+- **Output:** GitHub Issue with health report; updates `audit_history[]` in repo-registry.json
 - **Failure mode:** If registry is unreachable, opens critical alert issue and exits non-zero
 
 **`dependency-validator`** -- DESIGN PHASE
@@ -228,7 +228,7 @@ Each agent is a GitHub Actions workflow with a defined trigger, scope, and outpu
 - **Workflow:** `validate-dependencies.yml` (template deployed to repos with `.meta/dependencies.json`)
 - **Trigger:** `on: pull_request` (paths: `.meta/dependencies.json`, `seed.yaml`, `package.json`, `requirements.txt`, `Cargo.toml`)
 - **Scope:** Single repo per invocation; validates against central registry
-- **Actions:** Fetches registry-v2.json from orchestration-start-here, builds directed graph, checks for cycles, validates no back-edges (III -> II, II -> I are forbidden), enforces transitive depth <= 4
+- **Actions:** Fetches repo-registry.json from orchestration-start-here, builds directed graph, checks for cycles, validates no back-edges (III -> II, II -> I are forbidden), enforces transitive depth <= 4
 - **Output:** PR comment with validation results; blocks merge on failure
 - **Failure mode:** If central registry is unreachable, warns but does not block (graceful degradation)
 
@@ -250,12 +250,12 @@ Each agent is a GitHub Actions workflow with a defined trigger, scope, and outpu
 - **Trigger:** `schedule: "0 7 * * 1"` (weekly Monday 07:00 UTC, one hour after health audit) + `workflow_dispatch`
 - **Scope:** All repos with `seed.yaml` deployed
 - **Actions:**
-  1. Clones or fetches `seed.yaml` from every repo in registry-v2.json
+  1. Clones or fetches `seed.yaml` from every repo in repo-registry.json
   2. Builds the complete producer-consumer graph
   3. Validates all contracts: does every declared consumer actually exist? Does every declared producer have at least one consumer?
   4. Detects orphaned repos (no produces, no consumes — isolated from the system)
   5. Detects missing connections (producer exists but no consumer has declared it)
-  6. Validates seed.yaml `metadata` blocks against registry-v2.json
+  6. Validates seed.yaml `metadata` blocks against repo-registry.json
 - **Output:** System graph report as GitHub Issue; highlights contract violations, orphans, and drift
 - **Failure mode:** If >10% of repos lack seed.yaml, reports coverage gap instead of failing
 
@@ -308,7 +308,7 @@ Each agent is a GitHub Actions workflow with a defined trigger, scope, and outpu
 - **Scope:** Single new contributor
 - **Actions:**
   1. Reads contributor's stated interests from issue body
-  2. Matches interests against organ domains and repo descriptions in registry-v2.json
+  2. Matches interests against organ domains and repo descriptions in repo-registry.json
   3. Generates personalized onboarding path: 3-5 repos to explore, 2-3 essays to read, 1 reading group to join
 - **Output:** Comment on the issue with onboarding recommendations
 - **Failure mode:** If interest matching fails, provides default onboarding path (start with orchestration-start-here)
@@ -352,20 +352,20 @@ Quality gates are typed validation checks. Each gate has a unique identifier, an
 **`registry-valid`**
 
 - **Implementation:** Python script (`scripts/validate-registry.py`)
-- **Check:** registry-v2.json conforms to JSON schema v0.3; all required fields populated; `total_repos` matches actual repo count; `implementation_status_distribution` sums to `total_repos`; all org `repository_count` values match actual array lengths
+- **Check:** repo-registry.json conforms to JSON schema v0.3; all required fields populated; `total_repos` matches actual repo count; `implementation_status_distribution` sums to `total_repos`; all org `repository_count` values match actual array lengths
 - **Pass criterion:** Zero schema violations, zero count mismatches
 - **Deployed:** Yes (runs as part of `registry-health-audit.yml`)
 
 **`no-back-edges`**
 
 - **Implementation:** Python script (`scripts/validate-dependencies.py`)
-- **Check:** Builds directed graph from registry-v2.json `dependencies[]` fields. Validates: (a) no cycles exist, (b) no forbidden edges exist (ORGAN-III -> ORGAN-II, ORGAN-II -> ORGAN-I for content flow; ORGAN-IV observes all but creates no content dependencies), (c) transitive depth <= 4
+- **Check:** Builds directed graph from repo-registry.json `dependencies[]` fields. Validates: (a) no cycles exist, (b) no forbidden edges exist (ORGAN-III -> ORGAN-II, ORGAN-II -> ORGAN-I for content flow; ORGAN-IV observes all but creates no content dependencies), (c) transitive depth <= 4
 - **Pass criterion:** Zero cycles, zero forbidden edges, all paths <= 4 hops
 - **Deployed:** Yes (runs as part of health audit and validate-dependencies workflow)
 
 **`audit-clean`**
 
-- **Implementation:** Check against most recent `audit_history[]` entry in registry-v2.json
+- **Implementation:** Check against most recent `audit_history[]` entry in repo-registry.json
 - **Check:** Latest weekly health audit completed successfully with zero critical alerts
 - **Pass criterion:** Most recent audit has `critical_alerts == 0` and `completed == true`
 - **Deployed:** Partially (audit runs; gate enforcement pending)
@@ -437,7 +437,7 @@ Cross-organ events follow a standard schema:
 
 - **Trigger:** New repository created in any of the 8 orgs
 - **Actions:**
-  1. Update registry-v2.json with new entry (org, name, status, implementation_status: DESIGN_ONLY)
+  1. Update repo-registry.json with new entry (org, name, status, implementation_status: DESIGN_ONLY)
   2. Assign seed.yaml template based on organ membership
   3. Create `.github/workflows/` with standard CI workflow for detected language
   4. Open issue in orchestration-start-here: "New repo detected: {org}/{repo}"
@@ -447,7 +447,7 @@ Cross-organ events follow a standard schema:
 
 - **Trigger:** CI workflow completes successfully on main/master branch
 - **Actions:**
-  1. Update `last_validated` timestamp in registry-v2.json
+  1. Update `last_validated` timestamp in repo-registry.json
   2. Check if repo qualifies for promotion (e.g., SKELETON -> PROTOTYPE if tests now exist and pass)
   3. If promotion candidate, add to next `promotion-recommender` batch
 - **Consumers:** `promotion-recommender`
@@ -458,7 +458,7 @@ Cross-organ events follow a standard schema:
 - **Actions:**
   1. Fire `repository_dispatch` to `social-automation` (triggers distribution-agent)
   2. Fire `repository_dispatch` to `reading-group-curriculum` (triggers reading-list-curator)
-  3. Update essay count in registry-v2.json summary
+  3. Update essay count in repo-registry.json summary
 - **Consumers:** `distribution-agent`, `reading-list-curator`
 
 **`release.created`**
@@ -476,7 +476,7 @@ Cross-organ events follow a standard schema:
 - **Actions:**
   1. Generate summary issue with system health metrics
   2. If critical alerts detected, create individual issues in affected repos
-  3. Update `audit_history[]` in registry-v2.json
+  3. Update `audit_history[]` in repo-registry.json
   4. If >5 warnings, trigger `promotion-recommender` for early evaluation
 - **Consumers:** `orchestrator-agent`, `promotion-recommender`
 
@@ -505,7 +505,7 @@ Rate limits: GitHub allows 5,000 API requests per hour per PAT. With 88 repos an
 - `seed.yaml` schema v1.0 defined and documented
 - `seed.yaml` deployed to `orchestration-start-here` as canonical reference
 - `registry-health-audit.yml` deployed and running weekly (Monday 06:00 UTC)
-- `registry-v2.json` serving as single source of truth (88 repos, 74 PRODUCTION)
+- `repo-registry.json` serving as single source of truth (88 repos, 74 PRODUCTION)
 - CI workflows deployed to 77+ repos
 - `.meta/dependencies.json` deployed to 7 flagship repos
 - `validate-dependencies.yml` template available for per-repo deployment
@@ -516,7 +516,7 @@ Rate limits: GitHub allows 5,000 API requests per hour per PAT. With 88 repos an
 **Estimated effort:** ~150K TE
 **Prerequisites:** Phase A complete
 
-- Generate seed.yaml templates for all 88 repos based on registry-v2.json data
+- Generate seed.yaml templates for all 88 repos based on repo-registry.json data
 - Deploy via batch `gh api` operation (base64-encoded content, one commit per repo)
 - Validate all 88 seed.yaml files parse correctly
 - Run `orchestrator-agent` in dry-run mode to verify graph construction
@@ -603,7 +603,7 @@ graph TD
     end
 
     subgraph "ORGAN-IV: Orchestration (7 repos)"
-        IV_REG[registry-v2.json<br/>Single Source of Truth]
+        IV_REG[repo-registry.json<br/>Single Source of Truth]
         IV_AGENTS[Agent Catalog<br/>registry-health-auditor<br/>dependency-validator<br/>promotion-recommender<br/>orchestrator-agent]
         IV_SEED[seed.yaml Contracts<br/>88 repos declared]
     end
@@ -706,7 +706,7 @@ sequenceDiagram
 | Orchestration System v2 | `docs/implementation/orchestration-system-v2.md` | Governance rules and dependency model |
 | GitHub Actions Spec | `docs/implementation/github-actions-spec.md` | 5 core workflow specifications |
 | Public Process Map v2 | `docs/implementation/public-process-map-v2.md` | ORGAN-V content strategy |
-| Registry v2 | `registry-v2.json` | Single source of truth (88 repos) |
+| Registry v2 | `repo-registry.json` | Single source of truth (88 repos) |
 | Project Constitution | `docs/memory/constitution.md` | Immutable principles (Articles I-VI) |
 | Roadmap | `docs/strategy/roadmap-there-and-back-again.md` | Phased execution plan |
 | Repository Standards | `docs/standards/10-repository-standards.md` | Naming, licensing, community health |

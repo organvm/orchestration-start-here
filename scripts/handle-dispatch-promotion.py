@@ -81,7 +81,7 @@ def main():
     print(f"  Triggered by: {triggered_by}")
 
     # Load registry
-    with open("registry-v2.json") as f:
+    with open("repo-registry.json") as f:
         registry = json.load(f)
 
     # Find source repo in registry

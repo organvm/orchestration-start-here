@@ -71,7 +71,7 @@ gh api \
 
 ### GitHub-Specific
 
-Custom Properties only exist in GitHub. If the system ever migrates to another platform (GitLab, Gitea), this metadata is lost. `seed.yaml` and `registry-v2.json` are platform-agnostic.
+Custom Properties only exist in GitHub. If the system ever migrates to another platform (GitLab, Gitea), this metadata is lost. `seed.yaml` and `repo-registry.json` are platform-agnostic.
 
 ### Cannot Store Complex Data
 
@@ -85,7 +85,7 @@ No support for nested objects, arrays, or structured data. The `produces`/`consu
 
 ### No Versioning
 
-Custom Properties have no history. When a repo's promotion_status changes from CANDIDATE to PUBLIC_PROCESS, there's no record of when the change happened. `seed.yaml` changes are tracked in git history; registry changes are tracked in `registry-v2.json` commits.
+Custom Properties have no history. When a repo's promotion_status changes from CANDIDATE to PUBLIC_PROCESS, there's no record of when the change happened. `seed.yaml` changes are tracked in git history; registry changes are tracked in `repo-registry.json` commits.
 
 ### Org-Level Restriction
 
@@ -99,18 +99,18 @@ Custom Properties require GitHub Team plan or higher for some features. Free org
 
 ## Recommendation
 
-**Use Custom Properties as a read-side supplement, not a replacement for `registry-v2.json` or `seed.yaml`.**
+**Use Custom Properties as a read-side supplement, not a replacement for `repo-registry.json` or `seed.yaml`.**
 
 ### Source of Truth Hierarchy
 
 1. **`seed.yaml`** (per-repo) — Canonical declaration of organ, tier, edges, subscriptions
-2. **`registry-v2.json`** (system-wide) — Aggregated view of all repos, computed metrics
+2. **`repo-registry.json`** (system-wide) — Aggregated view of all repos, computed metrics
 3. **GitHub Custom Properties** (per-org) — Read-optimized view for GitHub UI/API queries
 
 ### Sync Direction
 
 ```
-seed.yaml → registry-v2.json → GitHub Custom Properties
+seed.yaml → repo-registry.json → GitHub Custom Properties
 ```
 
 Never write to seed.yaml or registry based on Custom Properties. The sync is one-way: source files push to GitHub, not the reverse.
@@ -163,7 +163,7 @@ Add to `orchestration-start-here/scripts/`:
 
 ```python
 #!/usr/bin/env python3
-"""Sync registry-v2.json metadata to GitHub Custom Properties."""
+"""Sync repo-registry.json metadata to GitHub Custom Properties."""
 
 import json
 import subprocess
@@ -212,7 +212,7 @@ Add a workflow step that syncs Custom Properties after any registry update:
 
 ## References
 
-- `registry-v2.json` — System-wide registry (source of truth)
+- `repo-registry.json` — System-wide registry (source of truth)
 - `seed.yaml` schema — Per-repo metadata (canonical declaration)
 - `governance-rules.json` — Article I (registry is single source of truth)
 - [Repository Rulesets](repository-rulesets.md) — Rulesets can target repos by Custom Properties

@@ -39,7 +39,7 @@ except ImportError:
         / "Workspace"
         / "meta-organvm"
         / "organvm-corpvs-testamentvm"
-        / "registry-v2.json"
+        / "repo-registry.json"
     )
 
 
@@ -327,7 +327,7 @@ def _write_initial_journal(ws_path: Path, target: ContributionTarget) -> None:
 
 
 def _register_in_registry(target: ContributionTarget, ws_name: str) -> bool:
-    """Add entry to registry-v2.json."""
+    """Add entry to repo-registry.json."""
     if not REGISTRY_PATH.exists():
         logger.warning("Registry not found: %s", REGISTRY_PATH)
         return False

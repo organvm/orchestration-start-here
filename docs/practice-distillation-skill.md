@@ -41,7 +41,7 @@ tags:
   - architecture
 requires:
   - governance-rules.json awareness
-  - registry-v2.json schema knowledge
+  - repo-registry.json schema knowledge
   - seed.yaml schema knowledge
 ```
 

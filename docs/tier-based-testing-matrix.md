@@ -115,7 +115,7 @@ The `validate-deps.py` script in this repo enforces this constraint. Any `consum
 
 ### 3. Registry Entry Exists
 
-Every repo with a `seed.yaml` must have a corresponding entry in `registry-v2.json` (or `registry.json` for legacy repos). The registry entry must match the `seed.yaml` on critical fields: organ, tier, and promotion_status.
+Every repo with a `seed.yaml` must have a corresponding entry in `repo-registry.json` (or `registry.json` for legacy repos). The registry entry must match the `seed.yaml` on critical fields: organ, tier, and promotion_status.
 
 ---
 

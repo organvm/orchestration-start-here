@@ -30,7 +30,7 @@ All three conditions must be true simultaneously. A repo with no commits but act
 
 The `organ-audit.py` script generates archive candidates as part of its monthly run. The audit:
 
-1. Queries `registry-v2.json` for all repos with `promotion_status: LOCAL`
+1. Queries `repo-registry.json` for all repos with `promotion_status: LOCAL`
 2. Checks last commit date via git log or GitHub API
 3. Checks the dependency graph for inbound `consumes` edges
 4. Outputs a list of repos meeting all three criteria
@@ -68,7 +68,7 @@ When the warning period expires without intervention:
 
 ### Step 1: Update Registry
 
-Set `promotion_status: ARCHIVED` in `registry-v2.json`:
+Set `promotion_status: ARCHIVED` in `repo-registry.json`:
 
 ```json
 {
@@ -112,7 +112,7 @@ archived_date: "2026-MM-DD"
 Archival is reversible. Unarchiving a repo requires:
 
 1. **Unarchive on GitHub**: `gh repo unarchive <org>/<repo> --yes`
-2. **Reset promotion status**: Set `promotion_status: LOCAL` in both `registry-v2.json` and `seed.yaml`
+2. **Reset promotion status**: Set `promotion_status: LOCAL` in both `repo-registry.json` and `seed.yaml`
 3. **Re-enter the promotion pipeline**: The repo must progress through `LOCAL -> CANDIDATE -> PUBLIC_PROCESS -> GRADUATED` like any new repo. There is no shortcut back to the repo's pre-archive status.
 4. **Create a tracking issue**: Document why the repo was unarchived and what work is planned
 

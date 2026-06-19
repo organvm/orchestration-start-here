@@ -30,7 +30,7 @@ jobs:
           python-version: '3.12'
 
       - name: Fetch canonical registry
-        run: bash scripts/fetch-registry.sh registry-v2.json
+        run: bash scripts/fetch-registry.sh repo-registry.json
 
       - name: Enforce governance rules
         run: |
@@ -43,7 +43,7 @@ jobs:
           # --- Load governance rules and registry ---
 
           governance_path = 'governance-rules.json'
-          registry_path = 'registry-v2.json'
+          registry_path = 'repo-registry.json'
 
           for path in [governance_path, registry_path]:
               if not os.path.exists(path):

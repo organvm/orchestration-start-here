@@ -13,7 +13,7 @@ Without reusable CI templates, each repo invents its own workflow, leading to
 inconsistent quality gates and maintenance burden.
 
 This document defines 3 canonical CI template tiers matching the `ci_workflow`
-enumerations in registry-v2.json.
+enumerations in repo-registry.json.
 
 ---
 
@@ -212,7 +212,7 @@ Flagship repos add:
 
 ## Mapping to Registry
 
-The `ci_workflow` field in registry-v2.json maps repos to templates:
+The `ci_workflow` field in repo-registry.json maps repos to templates:
 
 | `ci_workflow` Value | Template | Description |
 |---------------------|----------|-------------|
@@ -238,7 +238,7 @@ The `ci_workflow` field in registry-v2.json maps repos to templates:
 
 1. Copy the appropriate template to your repo's `.github/workflows/ci.yml`
 2. Adjust the Python/Node version to match your `pyproject.toml` or `package.json`
-3. Update the `ci_workflow` field in registry-v2.json
+3. Update the `ci_workflow` field in repo-registry.json
 4. Run the workflow locally first: `act -j lint` (if using `act`)
 5. Push and verify CI passes on the PR
 

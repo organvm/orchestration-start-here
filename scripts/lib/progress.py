@@ -1889,6 +1889,6 @@ def export_markdown(projects: list[ProjectProgress], summary: SystemSummary) -> 
 # ---------------------------------------------------------------------------
 
 def load_registry(path: Path) -> dict[str, Any]:
-    """Load registry-v2.json."""
+    """Load repo-registry.json."""
     with open(path) as f:
         return json.load(f)

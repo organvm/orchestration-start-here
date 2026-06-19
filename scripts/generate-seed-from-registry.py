@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reconcile seed.yaml files against registry-v2.json.
+"""Reconcile seed.yaml files against repo-registry.json.
 # ISOTOPE DISSOLUTION: Gate circulatory--contribute G1
 
 Three modes:
@@ -38,7 +38,7 @@ except ImportError:
     _HAS_ENGINE = False
 
 WORKSPACE = Path.home() / "Workspace"
-REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "registry-v2.json"
+REGISTRY_PATH = WORKSPACE / "meta-organvm" / "organvm-corpvs-testamentvm" / "repo-registry.json"
 
 ORG_DIRS = {
     "organvm-i-theoria": "organvm-i-theoria",
@@ -88,7 +88,7 @@ STATUS_NORMALIZATION = {
 
 
 def load_registry(path: Path) -> dict:
-    """Load registry-v2.json and flatten into {org/repo: entry} dict."""
+    """Load repo-registry.json and flatten into {org/repo: entry} dict."""
     with open(path) as f:
         data = json.load(f)
 
@@ -366,7 +366,7 @@ def generate_mode(registry: dict, seeds: dict[str, Path]) -> int:
 def main():
     default_registry = str(_engine_registry_path()) if _HAS_ENGINE else str(REGISTRY_PATH)
 
-    parser = argparse.ArgumentParser(description="Reconcile seed.yaml vs registry-v2.json")
+    parser = argparse.ArgumentParser(description="Reconcile seed.yaml vs repo-registry.json")
     parser.add_argument(
         "--mode",
         required=True,
@@ -376,7 +376,7 @@ def main():
     parser.add_argument(
         "--registry",
         default=default_registry,
-        help=f"Path to registry-v2.json (default: {default_registry})",
+        help=f"Path to repo-registry.json (default: {default_registry})",
     )
     parser.add_argument(
         "--workspace",
