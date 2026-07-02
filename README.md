@@ -10,7 +10,7 @@
 [![Python](https://img.shields.io/badge/lang-Python-informational)](https://github.com/organvm-iv-taxis/orchestration-start-here)
 
 
-**The central nervous system of an eight-organ creative-institutional architecture.** This repository is the single coordination point for ~80 repositories distributed across 8 GitHub organizations, enforcing governance rules, validating cross-organ dependencies, running monthly system-wide health audits, and automating the promotion pipeline that moves work from theoretical research through artistic expression into commercial products. Everything in this system — every README deployed, every dependency validated, every essay published — flows through the data structures and automation pipelines defined here.
+**The central nervous system of an eight-organ creative-institutional architecture.** This repository is the single coordination point for 171 repositories distributed across 8 GitHub organizations, enforcing governance rules, validating cross-organ dependencies, running monthly system-wide health audits, and automating the promotion pipeline that moves work from theoretical research through artistic expression into commercial products. Everything in this system — every README deployed, every dependency validated, every essay published — flows through the data structures and automation pipelines defined here.
 
 ---
 
@@ -83,7 +83,7 @@ The organvm system organizes creative and institutional work into eight organs �
 | V | Logos | Public Process — essays, building in public | [organvm-v-logos](https://github.com/organvm-v-logos) | 2 | [public-process](https://github.com/organvm-v-logos/public-process) |
 | VI | Koinonia | Community — salons, reading groups | [organvm-vi-koinonia](https://github.com/organvm-vi-koinonia) | 3 | org profile |
 | VII | Kerygma | Marketing — POSSE distribution, announcements | [organvm-vii-kerygma](https://github.com/organvm-vii-kerygma) | 4 | org profile |
-| VIII | Meta | Umbrella — cross-organ coordination | [meta-organvm](https://github.com/meta-organvm) | 1 | org profile |
+| VIII | Meta | Umbrella — cross-organ coordination | [meta-organvm](https://github.com/organvm) | 1 | org profile |
 
 The Greek suffix naming convention (Theoria, Poiesis, Ergon, Taxis, Logos, Koinonia, Kerygma) is drawn from Aristotelian categories of knowledge and action. Each name maps to the organ's function: *theoria* for contemplative knowledge, *poiesis* for creative making, *ergon* for productive work, *taxis* for ordering and arrangement.
 
@@ -691,14 +691,14 @@ New workflows should follow the existing pattern:
 | V — Logos | Public Process | [organvm-v-logos](https://github.com/organvm-v-logos) | 2 | 1 | 1 | OPERATIONAL |
 | VI — Koinonia | Community | [organvm-vi-koinonia](https://github.com/organvm-vi-koinonia) | 3 | 0 | 0 | OPERATIONAL |
 | VII — Kerygma | Marketing | [organvm-vii-kerygma](https://github.com/organvm-vii-kerygma) | 4 | 0 | 0 | OPERATIONAL |
-| VIII — Meta | Umbrella | [meta-organvm](https://github.com/meta-organvm) | 1 | 0 | 0 | OPERATIONAL |
-| **Total** | | | **80** | **57** | **5** | **8/8** |
+| VIII — Meta | Umbrella | [meta-organvm](https://github.com/organvm) | 1 | 0 | 0 | OPERATIONAL |
+| **Total** | | | **171** | **57** | **5** | **8/8** |
 
 ### Repository Contents
 
 | File/Directory | Purpose |
 |----------------|---------|
-| `registry.json` | Machine-readable source of truth — all 80 repos tracked with status, dependencies, promotion state, portfolio relevance |
+| `registry.json` | Machine-readable source of truth — all 171 repos tracked with status, dependencies, promotion state, portfolio relevance |
 | `governance-rules.json` | Constitutional articles (I-VI), amendments (A-D), quality gates, promotion rules, dependency direction constraints |
 | `.github/workflows/validate-dependencies.yml` | PR-triggered dependency validation with cycle detection and transitive depth analysis |
 | `.github/workflows/monthly-organ-audit.yml` | Scheduled system-wide health check with issue creation and registry update |
@@ -716,7 +716,7 @@ New workflows should follow the existing pattern:
 
 - **[ORGAN-V Essays](https://github.com/organvm-v-logos/public-process/tree/main/essays/meta-system)** — Five meta-system essays on orchestration, governance, portfolio strategy, building in public, and five-year vision
 - **[ORGAN-V Jekyll Site](https://organvm-v-logos.github.io/public-process/)** — Published essays with RSS feed
-- **[meta-organvm](https://github.com/meta-organvm)** — Umbrella organization with cross-organ navigation
+- **[meta-organvm](https://github.com/organvm)** — Umbrella organization with cross-organ navigation
 - **[recursive-engine--generative-entity](https://github.com/organvm-i-theoria/recursive-engine--generative-entity)** — ORGAN-I flagship: the theoretical engine that seeds the entire system
 - **[metasystem-master](https://github.com/organvm-ii-poiesis/metasystem-master)** — ORGAN-II flagship: the artistic metasystem built on ORGAN-I foundations
 - **[agentic-titan](https://github.com/organvm-iv-taxis/agentic-titan)** — ORGAN-IV flagship: the AI agent framework that powers orchestration automation
@@ -724,7 +724,7 @@ New workflows should follow the existing pattern:
 
 ---
 
-*Part of the [organvm eight-organ system](https://github.com/meta-organvm) — ORGAN-IV: Orchestration (Taxis). All eight organs operational. System launched 2026-02-11.*
+*Part of the [organvm eight-organ system](https://github.com/organvm) — ORGAN-IV: Orchestration (Taxis). All eight organs operational. System launched 2026-02-11.*
 
 <!-- SYSTEM-NAV-START -->
 
